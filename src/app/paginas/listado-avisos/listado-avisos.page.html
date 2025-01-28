@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Publicaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let aviso of avisos">
+      <ion-thumbnail slot="start">
+        <img [src]="aviso.imagen" alt="Imagen del aviso">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ aviso.titulo }}</h2>
+        <p>{{ aviso.fecha | date:'yyyy-MM-dd' }}</p>
+      </ion-label>
+      <ion-button fill="clear" color="danger" (click)="confirmarEliminacion(aviso.id)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/formulario-avisos">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

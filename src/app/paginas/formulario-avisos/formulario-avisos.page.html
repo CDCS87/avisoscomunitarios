@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listado-avisos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="guardarAviso()">
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input formControlName="titulo"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="form.get('titulo')?.invalid && form.get('titulo')?.touched">
+      <ion-text color="danger">El título debe tener una extensión de mínimo 5 caracteres</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea formControlName="descripcion"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="form.get('descripcion')?.invalid && form.get('descripcion')?.touched">
+      <ion-text color="danger">La descripción debe tener una extensión mínima de 20 caracteres</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fotografía</ion-label>
+      <ion-button expand="block" (click)="capturarFoto()">
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Fotografía
+      </ion-button>
+    </ion-item>
+
+    <!-- Solo esta visualización de la imagen -->
+    <ion-item *ngIf="imagen">
+      <img [src]="imagen" alt="Imagen Capturada" style="max-width: 100%; height: auto;">
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="form.invalid">
+      GUARDAR
+    </ion-button>
+  </form>
+</ion-content>
